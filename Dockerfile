@@ -22,3 +22,10 @@ RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86
     echo ". /opt/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc && \
     source ~/.bashrc
+
+# Copy environment base
+COPY environment.yml /opt
+RUN conda env create -f /opt/environment.yml && \
+    conda activate nvidia-conda-ml && \
+    pip3 install gevent
+
